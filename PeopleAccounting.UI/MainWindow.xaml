@@ -1,0 +1,195 @@
+﻿<Window x:Class="PeopleAccounting.UI.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+        WindowStartupLocation="CenterScreen"
+        Title="Облік жителів" Height="500" Width="900">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+            <GradientStop Color="#FFB7BDE0"/>
+            <GradientStop Color="#FFE4E6EC" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <DockPanel>
+        <Menu DockPanel.Dock="Top" Height="25">
+            <MenuItem Header="_Файл">
+                <MenuItem Header="Новий" Click="btnNew_Click" Icon="{StaticResource NewIcon}"/>
+                <MenuItem Header="Відкрити..." Click="btnOpen_Click" Icon="{StaticResource OpenIcon}"/>
+                <Separator/>
+                <MenuItem x:Name="btnSave" Header="Зберегти" Click="btnSave_Click" Icon="{StaticResource SaveIcon}"/>
+                <MenuItem x:Name="btnSaveAs" Header="Зберегти як..." Click="btnSaveAs_Click" Icon="{StaticResource SaveAsIcon}"/>
+                <Separator/>
+                <MenuItem Header="Вихід" Click="btnClose_Click" Icon="{StaticResource CloseIcon}"/>
+            </MenuItem>
+            <MenuItem Header="_Редагування">
+                <MenuItem Header="Додати до списку..." x:Name="btnAddItem" Click="btnAddItem_Click" ToolTip="Заповніть усі поля в розділі 'Редагування інформації'" Icon="{StaticResource AddIcon}"/>
+                <MenuItem Header="Видалити запис" x:Name="btnDeleteItem" Click="btnDeleteItem_Click" Icon="{StaticResource DeleteIcon}"/>
+                <Separator/>
+                <MenuItem Header="Очистити список" Click="btnClear_Click" Icon="{StaticResource ClearIcon}"/>
+            </MenuItem>
+            <MenuItem Header="_Вигляд">
+                <MenuItem x:Name="choosePanel"  Header="Панель вибору" IsCheckable="True" Checked="choosePanel_Checked" Unchecked="choosePanel_Unchecked"/>
+                <MenuItem x:Name="toolBarVisibility" Header="Панель інструментів" IsCheckable="True" Checked="toolBarVisibility_Checked" Unchecked="toolBarVisibility_Unchecked"/>
+            </MenuItem>
+            <MenuItem Header="_Довідка">
+                <MenuItem Header="Допомога"/>
+                <Separator/>
+                <MenuItem Header="Про програму"/>
+            </MenuItem>
+        </Menu>
+        <ToolBarTray x:Name="mainToolBarTray" DockPanel.Dock="Top" Margin="0" Background="#FFE5E7F7">
+            <ToolBar IsManipulationEnabled="True" Background="#FFE5E7F7">
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnNew_Click" ToolTip="Створити новий список" Content="{StaticResource NewIcon}"/>
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnOpen_Click" ToolTip="Відкрити текстовий файл з списком" Content="{StaticResource OpenIcon}"/>
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnSave_Click" ToolTip="Зберегти зміни" Content="{StaticResource SaveIcon}"/>
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnSaveAs_Click" ToolTip="Зберегти як" Content="{StaticResource SaveAsIcon}"/>
+            </ToolBar>
+            <ToolBar IsManipulationEnabled="True" Background="#FFE5E7F7">
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnEditItem_Click" ToolTip="Зберегти зміни!" Content="{StaticResource EditIcon}"/>
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnAddItem_Click" ToolTip="{Binding ElementName=btnAddItem, Path=ToolTip}" Content="{StaticResource AddIcon}"/>
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnDeleteItem_Click" ToolTip="Видалити виділений запис" Content="{StaticResource DeleteIcon}"/>
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnClear_Click" ToolTip="Очистити список" Content="{StaticResource ClearIcon}"/>
+            </ToolBar>
+        </ToolBarTray>
+        <StatusBar DockPanel.Dock="Bottom">
+            <StatusBar.Background>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFA5B4E2" Offset="0.783"/>
+                    <GradientStop Color="White"/>
+                    <GradientStop Color="#FFD9D9E4" Offset="0.292"/>
+                    <GradientStop Color="#FFAFC4FF" Offset="0.992"/>
+                </LinearGradientBrush>
+            </StatusBar.Background>
+            <StatusBarItem>
+                <TextBlock Text="Готово" Margin="4"/>
+            </StatusBarItem>
+            <StatusBarItem HorizontalAlignment="Right">
+                <TextBlock x:Name="fileName" Text="Немає відкритих файлів" Margin="4"/>
+            </StatusBarItem>
+        </StatusBar>
+        <Grid x:Name="mainGrid" DockPanel.Dock="Left">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1.3*"/>
+            </Grid.ColumnDefinitions>
+            <TabControl x:Name="tabSystem" Grid.Column="1">
+                <TabItem Header="Повний список">
+                    <DataGrid x:Name="dataGridPeople" IsReadOnly="True" SelectionMode="Single" AutoGeneratingColumn="dataGridPeople_AutoGeneratingColumn" 
+                      SelectionUnit="FullRow" AlternatingRowBackground="#FFD6DFFF" AlternationCount="2"  CanUserReorderColumns="False" 
+                      CanUserResizeRows="False" CanUserResizeColumns="False" SelectionChanged="dataGridPeople_SelectionChanged"/>
+                </TabItem>
+                <TabItem Header="Результати пошуку">
+                    <DataGrid x:Name="dataGridResults" IsReadOnly="True" SelectionMode="Single" AutoGeneratingColumn="dataGridPeople_AutoGeneratingColumn" 
+                      SelectionUnit="FullRow" AlternatingRowBackground="#FFD6DFFF" AlternationCount="2"  CanUserReorderColumns="False" 
+                      CanUserResizeRows="False" CanUserResizeColumns="False" SelectionChanged="dataGridPeople_SelectionChanged"/>
+                </TabItem>
+            </TabControl>
+            <StackPanel Grid.Column="0" Orientation="Vertical">
+                <Expander x:Name="personInfoEditor" Header="    Редактор інформації:" Margin="10,10,0,0">
+                    <StackPanel Orientation="Vertical">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                                <RowDefinition Height="1*"/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0">ІД: </Label>
+                            <Label Grid.Column="0" Grid.Row="1">Прізвище</Label>
+                            <Label Grid.Column="0" Grid.Row="2">Ім'я</Label>
+                            <Label Grid.Column="0" Grid.Row="3">Телефон</Label>
+                            <Label Grid.Column="0" Grid.Row="4">Країна</Label>
+                            <Label Grid.Column="0" Grid.Row="5">Область</Label>
+                            <Label Grid.Column="0" Grid.Row="6">Місто/село</Label>
+                            <Label Grid.Column="0" Grid.Row="7">Вулиця</Label>
+                            <Label Grid.Column="0" Grid.Row="8">Будинок №</Label>
+                            <Label Grid.Column="0" Grid.Row="9">Квартира №</Label>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="0" Margin="7,2,7,2" x:Name="idNum" Minimum="1" Value="1"/>
+                            <TextBox x:Name="lastName" Grid.Column="1" Grid.Row="1" Margin="0,2,4,2"/>
+                            <TextBox x:Name="firstName" Grid.Column="1" Grid.Row="2" Margin="0,2,4,2"/>
+                            <TextBox x:Name="number" Grid.Column="1" Grid.Row="3" Margin="0,2,4,2"/>
+                            <TextBox x:Name="country" Grid.Column="1" Grid.Row="4" Margin="0,2,4,2"/>
+                            <TextBox x:Name="region" Grid.Column="1" Grid.Row="5" Margin="0,2,4,2"/>
+                            <TextBox x:Name="locality" Grid.Column="1" Grid.Row="6" Margin="0,2,4,2"/>
+                            <TextBox x:Name="street" Grid.Column="1" Grid.Row="7" Margin="0,2,4,2"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="8" Margin="7,2,7,2" x:Name="buildNum" Minimum="1" Value="1"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="9" Margin="7,2,7,2" x:Name="apartNum" Minimum="1" Value="1"/>
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+                <Expander Header="     Критерії пошуку:" Margin="10,0,0,0">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="4*"/>
+                                <ColumnDefinition Width="1*"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <Label Grid.Column="0" Grid.Row="0"  Margin="0" ToolTip="Вкажіть прізвище людей, які проживають разом">Адреси за прізвищем:</Label>
+                            <Label Grid.Column="0" Grid.Row="1" Margin="0" ToolTip="Визначити імена та адреси людей з однаковим номером">Імена і адреси за номером:</Label>
+                            <Label Grid.Column="0" Grid.Row="2" Margin="0" ToolTip="Вкажіть адресу, за якою визначиться людина, що там проживає">Повне ім'я за адресою:</Label>
+                            <Label Grid.Column="0" Grid.Row="3" Margin="0" ToolTip="Вкажіть номер, щоб визначити тих людей, які мають однакове ім'я і проживають на одній вулиці">Імена/вулиці(однакові) за номером:</Label>
+                            <Label Grid.Column="0" Grid.Row="4" Margin="0" ToolTip="Визначити людей з однаковою адресою">Люди за адресою:</Label>
+                            <Button x:Name="btnfindAddressByLastname" Grid.Column="2" Height="28" Width="28" Grid.Row="0" Margin="3,0,1,1" Template="{DynamicResource RoundedToolBarButton}" Click="btnfindAddressByLastname_Click" Content="{StaticResource StartSearch}"/>
+                            <Button x:Name="btnfindNamesAndAddressByPhone" Grid.Column="2" Height="28" Width="28" Grid.Row="1" Margin="3,0,1,1" Template="{DynamicResource RoundedToolBarButton}" Click="btnfindNamesAndAddressByPhone_Click" Content="{StaticResource StartSearch}"/>
+                            <Button x:Name="btnfindFullNameByAddress" Grid.Column="2" Height="28" Width="28" Grid.Row="2" Margin="3,0,1,1" Template="{DynamicResource RoundedToolBarButton}" Click="btnfindFullNameByAddress_Click" Content="{StaticResource StartSearch}"/>
+                            <Button x:Name="btnfindSameNameAddressByPhone" Grid.Column="2" Height="28" Width="28" Grid.Row="3" Margin="3,0,1,1" Template="{DynamicResource RoundedToolBarButton}" Click="btnfindSameNameAddressByPhone_Click" Content="{StaticResource StartSearch}"/>
+                            <Button x:Name="btnfindPeopleByAddress" Grid.Column="2" Height="28" Width="28" Grid.Row="4" Margin="3,0,1,1" Template="{DynamicResource RoundedToolBarButton}" Click="btnfindPeopleByAddress_Click" Content="{StaticResource StartSearch}"/>
+                        </Grid>
+                        <Grid Margin="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0">Прізвище:</Label>
+                            <TextBox Grid.Column="1"  x:Name="findLastname"></TextBox>
+                        </Grid>
+                        <Separator Margin="2"/>
+                        <Grid Margin="3">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="1*"/>
+                                <ColumnDefinition Width="2*"/>
+                            </Grid.ColumnDefinitions>
+                            <Label Grid.Column="0">Телефон:</Label>
+                            <TextBox Grid.Column="1"  x:Name="findPhoneNumber"></TextBox>
+                        </Grid>
+                        <Separator/>
+                        <Label HorizontalAlignment="Center">Адреса:</Label>
+                        <Grid Margin="2">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                                <RowDefinition/>
+                            </Grid.RowDefinitions>
+                            <TextBox Margin="2" Grid.Row="0" ToolTip="Країна" x:Name="findCountry"/>
+                            <TextBox Margin="2" Grid.Row="1" ToolTip="Область" x:Name="findRegion"/>
+                            <TextBox Margin="2" Grid.Row="2" ToolTip="Місто" x:Name="findLocality"/>
+                            <TextBox Margin="2" Grid.Row="3" ToolTip="Вулиця" x:Name="findStreet"/>
+                            <xctk:IntegerUpDown Grid.Row="4" ToolTip="Номер будинку" Margin="2" x:Name="findBuild" Minimum="1" Value="1"/>
+                            <xctk:IntegerUpDown Grid.Row="5" ToolTip="Номер квартири" Margin="2" x:Name="findApart" Minimum="1" Value="1"/>
+                        </Grid>
+                    </StackPanel>
+                </Expander>
+            </StackPanel>
+        </Grid>
+    </DockPanel>
+</Window>
