@@ -7,8 +7,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleAccounting", "PeopleA
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleAccounting.UI", "PeopleAccounting.UI\PeopleAccounting.UI.csproj", "{BB7C927D-C67D-484C-A976-F4FD5927911B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleTester", "ConsoleTester\ConsoleTester.csproj", "{966658AC-05D1-4F21-800D-E5BC4E54ECF0}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PeopleAccounting.Tests", "PeopleAccounting.Tests\PeopleAccounting.Tests.csproj", "{1B7F87D7-D64E-41E2-8502-5CF0102A42D3}"
 EndProject
 Global
@@ -25,10 +23,6 @@ Global
 		{BB7C927D-C67D-484C-A976-F4FD5927911B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB7C927D-C67D-484C-A976-F4FD5927911B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB7C927D-C67D-484C-A976-F4FD5927911B}.Release|Any CPU.Build.0 = Release|Any CPU
-		{966658AC-05D1-4F21-800D-E5BC4E54ECF0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{966658AC-05D1-4F21-800D-E5BC4E54ECF0}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{966658AC-05D1-4F21-800D-E5BC4E54ECF0}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{966658AC-05D1-4F21-800D-E5BC4E54ECF0}.Release|Any CPU.Build.0 = Release|Any CPU
 		{1B7F87D7-D64E-41E2-8502-5CF0102A42D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{1B7F87D7-D64E-41E2-8502-5CF0102A42D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1B7F87D7-D64E-41E2-8502-5CF0102A42D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
