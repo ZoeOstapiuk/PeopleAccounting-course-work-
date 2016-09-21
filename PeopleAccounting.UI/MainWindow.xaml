@@ -34,7 +34,7 @@
             <MenuItem Header="_Довідка">
                 <MenuItem Header="Допомога"/>
                 <Separator/>
-                <MenuItem Header="Про програму"/>
+                <MenuItem Header="Про програму" Click="about_Click"/>
             </MenuItem>
         </Menu>
         <ToolBarTray x:Name="mainToolBarTray" DockPanel.Dock="Top" Margin="0" Background="#FFE5E7F7">
@@ -45,9 +45,9 @@
                 <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnSaveAs_Click" ToolTip="Зберегти як" Content="{StaticResource SaveAsIcon}"/>
             </ToolBar>
             <ToolBar IsManipulationEnabled="True" Background="#FFE5E7F7">
-                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnEditItem_Click" ToolTip="Зберегти зміни!" Content="{StaticResource EditIcon}"/>
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" x:Name="btnEditItem" Click="btnEditItem_Click" ToolTip="Зберегти зміни!" Content="{StaticResource EditIcon}"/>
                 <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnAddItem_Click" ToolTip="{Binding ElementName=btnAddItem, Path=ToolTip}" Content="{StaticResource AddIcon}"/>
-                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnDeleteItem_Click" ToolTip="Видалити виділений запис" Content="{StaticResource DeleteIcon}"/>
+                <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" IsEnabled="{Binding ElementName=btnDeleteItem, Path=IsEnabled}" Click="btnDeleteItem_Click" ToolTip="Видалити виділений запис" Content="{StaticResource DeleteIcon}"/>
                 <Button Height="35" Width="35" Margin="2" Template="{DynamicResource RoundedToolBarButton}" Click="btnClear_Click" ToolTip="Очистити список" Content="{StaticResource ClearIcon}"/>
             </ToolBar>
         </ToolBarTray>

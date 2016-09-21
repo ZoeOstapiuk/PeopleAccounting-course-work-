@@ -36,6 +36,9 @@ namespace PeopleAccounting.UI
             this.choosePanel.IsChecked = true;
             this.toolBarVisibility.IsChecked = true;
             (this.tabSystem.Items[1] as TabItem).Visibility = Visibility.Collapsed;
+
+            this.btnDeleteItem.IsEnabled = false;
+            this.btnEditItem.IsEnabled = false;
         }
 
         private Person getPersonFromInfoEditor()
@@ -171,6 +174,14 @@ namespace PeopleAccounting.UI
                 this.street.Text = selectedPerson.Address.Street;
                 this.buildNum.Value = selectedPerson.Address.BuildingNumber;
                 this.apartNum.Value = selectedPerson.Address.ApartamentNumber;
+
+                this.btnDeleteItem.IsEnabled = true;
+                this.btnEditItem.IsEnabled = true;
+            }
+            else
+            {
+                this.btnDeleteItem.IsEnabled = false;
+                this.btnEditItem.IsEnabled = false;
             }
         }
         #endregion
@@ -347,6 +358,7 @@ namespace PeopleAccounting.UI
         {
             if (!this.fileName.Text.EndsWith(".txt"))
             {
+                btnSaveAs_Click(sender, e);
                 return;
             }
 
@@ -447,6 +459,12 @@ namespace PeopleAccounting.UI
 
             this.dataGridPeople.Items.Refresh();
             (this.tabSystem.Items[1] as TabItem).Visibility = Visibility.Collapsed;
+        }
+
+        private void about_Click(object sender, RoutedEventArgs e)
+        {
+            AboutWindow abt = new AboutWindow();
+            abt.ShowDialog();
         }
         #endregion
     }

@@ -30,7 +30,7 @@ namespace PeopleAccounting
         [ColumnName("№")]
         public int ID { get; set; }
 
-        [ColumnName("Призвіще")]
+        [ColumnName("Прiзвіще")]
         public string LastName
         {
             get
