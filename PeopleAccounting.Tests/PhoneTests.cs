@@ -7,7 +7,7 @@ namespace PeopleAccounting.Tests
     public class PhoneTests
     {
         [TestMethod]
-        public void CannotAssignWrongFormat()
+        public void IsValid_BadNumber_ReturnsFalse()
         {
             Assert.IsFalse(PhoneNumber.IsValid(""));
             Assert.IsFalse(PhoneNumber.IsValid("abcdabcdabcds"));

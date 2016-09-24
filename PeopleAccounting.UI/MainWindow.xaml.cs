@@ -72,7 +72,7 @@ namespace PeopleAccounting.UI
             }
             catch (ArgumentNullException)
             {
-                MessageBox.Show("Будь ласка, заповність усі поля", this.Title);
+                MessageBox.Show("Будь ласка, заповніть усі поля", this.Title);
             }
             catch (InvalidOperationException)
             {
@@ -93,13 +93,13 @@ namespace PeopleAccounting.UI
                     Region = this.findRegion.Text,
                     Locality = this.findLocality.Text,
                     Street = this.findStreet.Text,
-                    BuildingNumber = this.findApart.Value.Value,
+                    BuildingNumber = this.findBuild.Value.Value,
                     ApartamentNumber = this.findApart.Value.Value
                 };
             }
             catch (ArgumentNullException)
             {
-                MessageBox.Show("Будь ласка, заповність усі поля адреси", this.Title);
+                MessageBox.Show("Будь ласка, заповніть усі поля", this.Title);
             }
             catch (InvalidOperationException)
             {
@@ -114,7 +114,7 @@ namespace PeopleAccounting.UI
             PhoneNumber result = null;
             if(!PhoneNumber.IsValid(this.findPhoneNumber.Text))
             {
-                MessageBox.Show("Будь ласка, введіть коректний номер телефону", this.Title);
+                MessageBox.Show("Будь ласка, введіть правильні дані для телефона", this.Title);
             }
             else
             {
@@ -189,7 +189,13 @@ namespace PeopleAccounting.UI
         #region Main Functions
         private void btnfindAddressByLastname_Click(object sender, RoutedEventArgs e)
         {
-            if (this.dataGridPeople.ItemsSource != null && !String.IsNullOrWhiteSpace(this.findLastname.Text))
+            if (String.IsNullOrWhiteSpace(this.findLastname.Text))
+            {
+                MessageBox.Show("Введіть прізвище", this.Title);
+                return;
+            }
+
+            if (this.dataGridPeople.ItemsSource != null)
             {
                 IEnumerable<Person> result = repo.FindAddressesByLastname(this.findLastname.Text);
                 if (result.Count() == 0)
@@ -465,6 +471,12 @@ namespace PeopleAccounting.UI
         {
             AboutWindow abt = new AboutWindow();
             abt.ShowDialog();
+        }
+
+        private void help_Click(object sender, RoutedEventArgs e)
+        {
+            HelpWindow help = new HelpWindow();
+            help.ShowDialog();
         }
         #endregion
     }

@@ -22,7 +22,7 @@
                 <MenuItem Header="Вихід" Click="btnClose_Click" Icon="{StaticResource CloseIcon}"/>
             </MenuItem>
             <MenuItem Header="_Редагування">
-                <MenuItem Header="Додати до списку..." x:Name="btnAddItem" Click="btnAddItem_Click" ToolTip="Заповніть усі поля в розділі 'Редагування інформації'" Icon="{StaticResource AddIcon}"/>
+                <MenuItem Header="Додати до списку" x:Name="btnAddItem" Click="btnAddItem_Click" ToolTip="Заповніть усі поля в розділі 'Редагування інформації'" Icon="{StaticResource AddIcon}"/>
                 <MenuItem Header="Видалити запис" x:Name="btnDeleteItem" Click="btnDeleteItem_Click" Icon="{StaticResource DeleteIcon}"/>
                 <Separator/>
                 <MenuItem Header="Очистити список" Click="btnClear_Click" Icon="{StaticResource ClearIcon}"/>
@@ -32,7 +32,7 @@
                 <MenuItem x:Name="toolBarVisibility" Header="Панель інструментів" IsCheckable="True" Checked="toolBarVisibility_Checked" Unchecked="toolBarVisibility_Unchecked"/>
             </MenuItem>
             <MenuItem Header="_Довідка">
-                <MenuItem Header="Допомога"/>
+                <MenuItem Header="Допомога" Click="help_Click"/>
                 <Separator/>
                 <MenuItem Header="Про програму" Click="about_Click"/>
             </MenuItem>
@@ -172,6 +172,10 @@
                         <Separator/>
                         <Label HorizontalAlignment="Center">Адреса:</Label>
                         <Grid Margin="2">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.7*" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                                 <RowDefinition/>
                                 <RowDefinition/>
@@ -180,12 +184,18 @@
                                 <RowDefinition/>
                                 <RowDefinition/>
                             </Grid.RowDefinitions>
-                            <TextBox Margin="2" Grid.Row="0" ToolTip="Країна" x:Name="findCountry"/>
-                            <TextBox Margin="2" Grid.Row="1" ToolTip="Область" x:Name="findRegion"/>
-                            <TextBox Margin="2" Grid.Row="2" ToolTip="Місто" x:Name="findLocality"/>
-                            <TextBox Margin="2" Grid.Row="3" ToolTip="Вулиця" x:Name="findStreet"/>
-                            <xctk:IntegerUpDown Grid.Row="4" ToolTip="Номер будинку" Margin="2" x:Name="findBuild" Minimum="1" Value="1"/>
-                            <xctk:IntegerUpDown Grid.Row="5" ToolTip="Номер квартири" Margin="2" x:Name="findApart" Minimum="1" Value="1"/>
+                            <Label Grid.Column="0" Grid.Row="0">Країна</Label>
+                            <Label Grid.Column="0" Grid.Row="1">Область</Label>
+                            <Label Grid.Column="0" Grid.Row="2">Місто/село/смт</Label>
+                            <Label Grid.Column="0" Grid.Row="3">Вулиця</Label>
+                            <Label Grid.Column="0" Grid.Row="4"> № будинку</Label>
+                            <Label Grid.Column="0" Grid.Row="5">№ квартири</Label>
+                            <TextBox Grid.Column="1" Margin="2" Grid.Row="0" ToolTip="Країна" x:Name="findCountry"/>
+                            <TextBox Grid.Column="1" Margin="2" Grid.Row="1" ToolTip="Область" x:Name="findRegion"/>
+                            <TextBox Grid.Column="1" Margin="2" Grid.Row="2" ToolTip="Місто" x:Name="findLocality"/>
+                            <TextBox Grid.Column="1" Margin="2" Grid.Row="3" ToolTip="Вулиця" x:Name="findStreet"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="4" ToolTip="Номер будинку" Margin="2" x:Name="findBuild" Minimum="1" Value="1"/>
+                            <xctk:IntegerUpDown Grid.Column="1" Grid.Row="5" ToolTip="Номер квартири" Margin="2" x:Name="findApart" Minimum="1" Value="1"/>
                         </Grid>
                     </StackPanel>
                 </Expander>

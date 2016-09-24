@@ -1,0 +1,53 @@
+﻿<Window x:Class="PeopleAccounting.UI.HelpWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Допомога" Height="600" Width="1000" ResizeMode="NoResize">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.45*"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <TreeView x:Name="treeView" Grid.Column="0" Margin="5">
+            <TreeViewItem Header="Інструкція">
+                <TreeViewItem Header="Відкрити" Selected="open_Selected"/>
+                <TreeViewItem Header="Зберегти" Selected="save_Selected"/>
+                <TreeViewItem Header="Створити" Selected="create_Selected"/>
+                <TreeViewItem Header="Сортувати" Selected="sort_Selected"/>
+                <TreeViewItem Header="Додати записи" Selected="add_Selected"/>
+                <TreeViewItem Header="Змінити запис" Selected="edit_Selected"/>
+                <TreeViewItem Header="Видалити запис" Selected="delete_Selected"/>
+                <TreeViewItem Header="Очистити список" Selected="clear_Selected"/>
+                <TreeViewItem Header="Вигляд">
+                    <TreeViewItem Header="Панель інструментів" Selected="toolBar_Selected"/>
+                    <TreeViewItem Header="Панель вибору" Selected="choose_Selected"/>
+                </TreeViewItem>
+                <TreeViewItem Header="Функції пошуку">
+                    <TreeViewItem Header="Адреси за прізвищем" Selected="addressesByLastname_Selected"/>
+                    <TreeViewItem Header="Іменa, адреси за номером" Selected="namesAddressesByNumber_Selected"/>
+                    <TreeViewItem Header="Повне ім'я за адресою" Selected="fullnameByAddress_Selected"/>
+                    <TreeViewItem Header="Імена, вулиці за номером" Selected="namesStreetsByNumber_Selected"/>
+                    <TreeViewItem Header="Люди за прізвищем" Selected="peopleByLastname_Selected"/>
+                </TreeViewItem>
+            </TreeViewItem>
+            <TreeViewItem Header="Аналіз помилок">
+                <TreeViewItem Header="Будь ласка, введіть правильні дані для телефона" Selected="error1_Selected"/>
+                <TreeViewItem Header="Будь ласка, заповніть усі поля" Selected="error2_Selected"/>
+                <TreeViewItem Header="Будь ласка, заповнюйте поля номерів будинку/квартири/ІД, використовуючи числа" Selected="error3_Selected"/>
+                <TreeViewItem Header="Будь ласка, введіть номер будинку і квартири правильно" Selected="error4_Selected"/>
+                <TreeViewItem Header="Введіть прізвище" Selected="error5_Selected"/>
+                <TreeViewItem Header="На жаль, не було знайдено результатів" Selected="error6_Selected"/>
+                <TreeViewItem Header="Людина з таким ІД вже існує" Selected="error7_Selected"/>
+                <TreeViewItem Header="Сталася помилка. Перевірте, чи редагований файл створений" Selected="error8_Selected"/>
+                <TreeViewItem Header="Оберіть правильний .txt файл" Selected="error9_Selected"/>
+            </TreeViewItem>
+        </TreeView>
+        <StackPanel Grid.Column="1">
+            <Label x:Name="header" Margin="5" FontSize="25" HorizontalAlignment="Center" Content="{Binding ElementName=treeView, Path=SelectedItem.Header}"/>
+            <FlowDocumentReader Width="670" Height="500" MinZoom="100">
+                <FlowDocument>
+                    <Paragraph x:Name="paragraph"/>
+                </FlowDocument>
+            </FlowDocumentReader>
+        </StackPanel>
+    </Grid>
+</Window>

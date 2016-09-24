@@ -21,7 +21,7 @@ namespace PeopleAccounting
         public bool TryParseFromString(string line, out Person person)
         {
             string[] entries = line.Trim(' ', '\t').Split(new char[] { '|' }, StringSplitOptions.RemoveEmptyEntries);
-            if (!IsLineCorrectForParsing(entries))
+            if (!AreLinesCorrectForParsing(entries))
             {
                 person = null;
                 return false;
@@ -42,7 +42,7 @@ namespace PeopleAccounting
             return true;
         }
 
-        private bool IsLineCorrectForParsing(string[] line)
+        private bool AreLinesCorrectForParsing(string[] line)
         {
             if (line.Length != lineEntriesCount)
             {
@@ -119,7 +119,7 @@ namespace PeopleAccounting
                                          repo[i].Address.Street, repo[i].Address.BuildingNumber, repo[i].Address.ApartamentNumber));
                 if (i < repo.Count - 1)
                 {
-                    lines.Append("\n");
+                    lines.AppendLine();
                 }
             }
 
