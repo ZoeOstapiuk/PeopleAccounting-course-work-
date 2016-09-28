@@ -2,8 +2,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeopleAccounting
 {
@@ -73,13 +71,14 @@ namespace PeopleAccounting
             people.Clear();
         }
 
-        public IList<Person> FindAddressesByLastname(string lastname)
+        public IList<Person> FindPeopleByLastname(string lastname)
         {
             if (String.IsNullOrWhiteSpace(lastname))
             {
                 throw new ArgumentNullException();
             }
 
+            // Використання LINQ для фільтрування записів
             return people.Where(p => p.LastName == lastname).ToList();
         }
 
@@ -90,6 +89,7 @@ namespace PeopleAccounting
                 throw new ArgumentNullException();
             }
 
+            // Використання LINQ для фільтрування записів
             return people.Where(p => p.Address.Equals(address)).ToList();
         }
 
@@ -100,6 +100,7 @@ namespace PeopleAccounting
                 throw new ArgumentNullException();
             }
 
+            // Використання LINQ для фільтрування записів
             return people.Where(p => p.Number.Equals(number)).ToList();
         }
 

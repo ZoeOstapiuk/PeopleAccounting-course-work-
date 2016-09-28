@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeopleAccounting
 {
@@ -13,6 +9,7 @@ namespace PeopleAccounting
             ColumnName = name;
         }
 
+        // Назва стовпця, що відображатиметься при наповненні таблиці
         public string ColumnName { get; set; }
     }
 }

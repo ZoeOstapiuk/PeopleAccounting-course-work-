@@ -5,16 +5,8 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Navigation;
-using System.Windows.Shapes;
 
 namespace PeopleAccounting.UI
 {
@@ -46,13 +38,13 @@ namespace PeopleAccounting.UI
             Person result = null;
             try
             {
-                PhoneNumber number = new PhoneNumber(this.number.Text);
+                PhoneNumber number = new PhoneNumber(this.number.Text.TrimEnd(' ', '\t'));
                 Address address = new Address
                 {
-                    Country = this.country.Text,
-                    Region = this.region.Text,
-                    Locality = this.locality.Text,
-                    Street = this.street.Text,
+                    Country = this.country.Text.TrimEnd(' ', '\t'),
+                    Region = this.region.Text.TrimEnd(' ', '\t'),
+                    Locality = this.locality.Text.TrimEnd(' ', '\t'),
+                    Street = this.street.Text.TrimEnd(' ', '\t'),
                     BuildingNumber = this.buildNum.Value.Value,
                     ApartamentNumber = this.apartNum.Value.Value
                 };
@@ -60,8 +52,8 @@ namespace PeopleAccounting.UI
                 result = new Person
                 {
                     ID = this.idNum.Value.Value,
-                    LastName = this.lastName.Text,
-                    FirstName = this.firstName.Text,
+                    LastName = this.lastName.Text.TrimEnd(' ', '\t'),
+                    FirstName = this.firstName.Text.TrimEnd(' ', '\t'),
                     Number = number,
                     Address = address
                 };
@@ -89,10 +81,10 @@ namespace PeopleAccounting.UI
             {
                 result = new Address
                 {
-                    Country = this.findCountry.Text,
-                    Region = this.findRegion.Text,
-                    Locality = this.findLocality.Text,
-                    Street = this.findStreet.Text,
+                    Country = this.findCountry.Text.TrimEnd(' ', '\t'),
+                    Region = this.findRegion.Text.TrimEnd(' ', '\t'),
+                    Locality = this.findLocality.Text.TrimEnd(' ', '\t'),
+                    Street = this.findStreet.Text.TrimEnd(' ', '\t'),
                     BuildingNumber = this.findBuild.Value.Value,
                     ApartamentNumber = this.findApart.Value.Value
                 };
@@ -112,13 +104,13 @@ namespace PeopleAccounting.UI
         private PhoneNumber getNumber()
         {
             PhoneNumber result = null;
-            if(!PhoneNumber.IsValid(this.findPhoneNumber.Text))
+            if(!PhoneNumber.IsValid(this.findPhoneNumber.Text.TrimEnd(' ', '\t')))
             {
                 MessageBox.Show("Будь ласка, введіть правильні дані для телефона", this.Title);
             }
             else
             {
-                result = new PhoneNumber(this.findPhoneNumber.Text);
+                result = new PhoneNumber(this.findPhoneNumber.Text.TrimEnd(' ', '\t'));
             }
 
             return result;
@@ -197,7 +189,7 @@ namespace PeopleAccounting.UI
 
             if (this.dataGridPeople.ItemsSource != null)
             {
-                IEnumerable<Person> result = repo.FindAddressesByLastname(this.findLastname.Text);
+                IEnumerable<Person> result = repo.FindPeopleByLastname(this.findLastname.Text);
                 if (result.Count() == 0)
                 {
                     MessageBox.Show("На жаль, не було знайдено результатів", this.Title);

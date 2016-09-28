@@ -30,7 +30,7 @@ namespace PeopleAccounting.Tests
         [TestMethod]
         public void FindsAddressesByLastName()
         {
-            var result = repo.FindAddressesByLastname("Людина1");
+            var result = repo.FindPeopleByLastname("Людина1");
 
             Assert.IsTrue(result.Count == 3);
             Assert.IsTrue(result[2].Address.Country == "c1");

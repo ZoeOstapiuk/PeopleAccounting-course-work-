@@ -1,11 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace PeopleAccounting.UI.PersonDisplayHelpers
+﻿namespace PeopleAccounting.UI.PersonDisplayHelpers
 {
+    // Клас, необхідний для фільтрації результату функції 
+    // пошуку лише імені та прізвища за певним критерієм
     public class FullName
     {
         [ColumnName("Ім'я")]

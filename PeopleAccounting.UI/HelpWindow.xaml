@@ -43,9 +43,12 @@
         </TreeView>
         <StackPanel Grid.Column="1">
             <Label x:Name="header" Margin="5" FontSize="25" HorizontalAlignment="Center" Content="{Binding ElementName=treeView, Path=SelectedItem.Header}"/>
-            <FlowDocumentReader Width="670" Height="500" MinZoom="100">
+            <FlowDocumentReader ViewingMode="Scroll" Width="670" Height="500" MinZoom="100">
                 <FlowDocument>
                     <Paragraph x:Name="paragraph"/>
+                    <BlockUIContainer>
+                        <Image x:Name="image"/>
+                    </BlockUIContainer>
                 </FlowDocument>
             </FlowDocumentReader>
         </StackPanel>

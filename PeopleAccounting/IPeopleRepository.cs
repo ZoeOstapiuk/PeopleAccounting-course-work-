@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace PeopleAccounting
 {
@@ -20,7 +16,9 @@ namespace PeopleAccounting
 
         void Clear();
 
-        IList<Person> FindAddressesByLastname(string lastname);
+        // Функції фільтрування, задані для варіанту
+
+        IList<Person> FindPeopleByLastname(string lastname);
 
         IList<Person> FindPeopleByPhoneNumber(PhoneNumber number);
 

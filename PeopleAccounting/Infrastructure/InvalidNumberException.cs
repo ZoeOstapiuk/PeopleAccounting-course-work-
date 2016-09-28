@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeopleAccounting
 {
@@ -22,6 +18,7 @@ namespace PeopleAccounting
 
         public InvalidNumberException(string message, Exception inner) : base(message, inner) { }
 
+        // Стрічка, що не інтерпретується коректно як номер телефону
         public string InvalidValue { get; set; }
     }
 }

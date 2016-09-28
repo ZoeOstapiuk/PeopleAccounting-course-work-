@@ -1,16 +1,11 @@
-﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
+﻿using System;
 
 namespace PeopleAccounting
 {
     public class PhoneNumber : IEquatable<PhoneNumber>
     {
+        // Для контексту програми коректними номерами вважатимуться
+        // лише українські телефонні номери з відповідним кодом
         public const string CountryCode = "+380";
         private string number;
 
@@ -40,6 +35,9 @@ namespace PeopleAccounting
             }
         }
 
+        // Функція перевіряє чи задана стрічка може інтерпретуватись
+        // як телефонний номер: починається з коду країни та містить
+        // лише цифри
         public static bool IsValid(string number)
         {
             if (String.IsNullOrWhiteSpace(number))

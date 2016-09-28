@@ -2,14 +2,16 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace PeopleAccounting
 {
     public class InvalidLinesDictionary : IEnumerable<KeyValuePair<int, string>>
     {
         private IDictionary<int, string> errorDictionary;
+
+        // Максимальна кількість записів, необхідна, бо файли можуть бути 
+        // дуже великими, тому немає необхідності в збереженні 
+        // кожного неправильного запису
         private int maxSize;
 
         public InvalidLinesDictionary(int max)
@@ -27,6 +29,7 @@ namespace PeopleAccounting
 
         public int MaxSize { get { return maxSize; } }
 
+        // В словник додається KeyValuePair<int, string>
         public void Add(int line, string record)
         {
             if (errorDictionary.Count == maxSize)

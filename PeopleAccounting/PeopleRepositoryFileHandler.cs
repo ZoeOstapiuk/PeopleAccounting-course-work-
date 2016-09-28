@@ -1,11 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
-using System.Linq;
 using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 
 namespace PeopleAccounting
 {
@@ -37,6 +32,8 @@ namespace PeopleAccounting
                 BuildingNumber = int.Parse(entries[8]),
                 ApartamentNumber = int.Parse(entries[9])
             };
+
+            // Формування результату
             person = new Person(entries[1], entries[2], int.Parse(entries[0]), number, address);
 
             return true;
@@ -87,7 +84,8 @@ namespace PeopleAccounting
             IPeopleRepository repo = new PeopleRepository();
             for (int i = 0; i < lines.Length; i++)
             {
-                // 1 Остапюк Зоя +380937538109 Україна Львівська Львів Гнатюка 20 9
+                // Приклад коректного запису
+                // 1|Остапюк|Зоя|+380937538109|Україна|Львівська|Львів|Гнатюка|20|9
                 Person result;
                 if (!TryParseFromString(lines[i], out result))
                 {
