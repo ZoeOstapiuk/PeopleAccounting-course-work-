@@ -3,6 +3,7 @@ using PeopleAccounting.UI.PersonDisplayHelpers;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Windows;
@@ -362,6 +363,11 @@ namespace PeopleAccounting.UI
 
             try
             {
+                if (!File.Exists(this.fileName.Text))
+                {
+                    MessageBox.Show("Сталася помилка. Перевірте, чи редагований файл створений", this.Title);
+                }
+
                 PeopleRepositoryFileHandler writer = new PeopleRepositoryFileHandler();
                 writer.WriteToFile(this.fileName.Text, repo);
             }
